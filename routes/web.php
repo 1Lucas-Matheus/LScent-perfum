@@ -13,6 +13,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 route::get('/categories', [CategoriesController::class, 'index'])->middleware(['auth', 'verified'])->name('categories.index');
+route::post('/categories', [CategoriesController::class, 'store'])->middleware(['auth', 'verified'])->name('categories.store');
+route::get('/categories/{category}/edit', [CategoriesController::class, 'edit'])->middleware(['auth', 'verified'])->name('categories.edit');
+route::put('/categories/{category}', [CategoriesController::class, 'update'])->middleware(['auth', 'verified'])->name('categories.update');
+route::delete('/categories/{category}', [CategoriesController::class, 'destroy'])->middleware(['auth', 'verified'])->name('categories.destroy');
 
 Route::get('/category', function () {
     return view('category.category');

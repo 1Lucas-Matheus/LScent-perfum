@@ -7,16 +7,16 @@ use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-    public readonly Categories $Categories;
+    public readonly Categories $categories;
     public function __construct()
     {
-        $this->Categories = new Categories();
+        $this->categories = new Categories();
     }
 
 
     public function index()
     {
-        $categories = $this->Categories->all();
+        $categories = $this->categories->all();
 
         return view('category.category', [
             'categories' => $categories
@@ -24,19 +24,26 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $categories = $this->categories->create([
+            'name' => $request->name
+        ]);
+
+        if ($categories) 
+        {
+            return redirect()->route('categories.index')->with('messageSuccess', 'Categoria criada com êxito.');
+        } else
+        {
+            return redirect()->route('categories.index')->with('messageError', 'Falha ao criar categoria');
+        }
     }
 
     /**

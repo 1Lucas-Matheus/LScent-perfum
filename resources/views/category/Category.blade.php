@@ -7,11 +7,13 @@
     <title>Categorias</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="{{ asset('js/modal.js') }}"></script>
+
     @include('components.sidebar')
+    @include('components.messageAlert')
+
 </head>
 
 <body>
-    
 
     <div class="sidebar">
         @yield('sidebar')
@@ -25,19 +27,24 @@
                     <div class="mb-6">
                         <h2 class="text-xl font-semibold mb-4 text-gray-800">Categorias</h2>
 
+                        <div class="messageAlert">
+                            @yield('messageAlert')
+                        </div>
+
                         <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
                             <table class="w-full text-sm text-left border-collapse">
                                 <tbody class="divide-y divide-gray-200 bg-white">
+                                    @foreach($categories as $category)
                                     <tr class="hover:bg-gray-50 transition">
                                         <td class="px-6 py-4 font-medium text-gray-900">
-                                            name
+                                            {{ $category->name }}
                                         </td>
                                         <td class="px-6 py-4 text-right flex justify-end space-x-3">
-                                            <a href="#" class="bg-blue-600 py-2 px-4 rounded-lg text-white font-medium shadow-md hover:bg-blue-500 transition duration-300" type="button">
+                                            <a href="{{ route('categories.edit', ['category' => $category->id]) }}" class="bg-blue-600 py-2 px-4 rounded-lg text-white font-medium shadow-md hover:bg-blue-500 transition duration-300" type="button">
                                                 Editar
                                             </a>
 
-                                            <form action="#" method="post" onsubmit="return confirm('Tem certeza que deseja apagar a categoria: name?');">
+                                            <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post" onsubmit="return confirm('Tem certeza que deseja apagar a categoria: name?');">
                                                 @csrf
                                                 <input type="hidden" name="_method" value="delete">
                                                 <button type="submit" class="bg-red-600 py-2 px-4 rounded-lg text-white font-medium shadow-md hover:bg-red-500 transition duration-300">
@@ -46,18 +53,15 @@
                                             </form>
                                         </td>
                                     </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
-
-
 
     <button data-modal-target="Modal-Create" data-modal-toggle="Modal-Create" class="fixed bottom-6 right-6 bg-gray-800 hover:bg-gray-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg transition" type="button">
         add
@@ -77,7 +81,7 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <form id="category-form" action="" method="post">
+                <form id="category-form" method="post">
                     @csrf
                     <div class="p-4 md:p-5 space-y-4">
                         <label for="input-group-1" class="block mb-2 text-sm text-gray-900">Categoria</label>
