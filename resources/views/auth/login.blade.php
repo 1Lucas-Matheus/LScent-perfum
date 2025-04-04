@@ -23,7 +23,7 @@
                     <div class="absolute inset-y-0 start-0 flex items-center ps-2.5 pointer-events-none">
                         <img src="{{ asset('Imgs/Icons/email.png') }}" alt="Ícone de Email" class="w-5 h-5 text-gray-500 dark:text-gray-400">
                     </div>
-                    <input type="email" id="input-group-1" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-100 dark:border-gray-400 dark:placeholder-gray-500 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nome@gmail.com" name="email">
+                    <input type="email" id="input-group-1" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-100 dark:border-gray-400 dark:placeholder-gray-500 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="nome@gmail.com" name="email" required>
                 </div>
 
                 <label for="input-group-2" class="block my-2 text-sm text-gray-900">Senha</label>
@@ -31,7 +31,7 @@
                     <div class="absolute inset-y-0 start-0 flex items-center ps-2 pointer-events-none">
                         <img src="{{ asset('Imgs/Icons/passwordIndicator.png') }}" alt="Ícone de Senha" class="w-6 h-6 text-gray-500 dark:text-gray-400">
                     </div>
-                    <input type="password" id="input-group-2" class="bg-gray-50 border border-gray-800 text-gray-900 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-100 dark:border-gray-400 dark:placeholder-gray-500 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="********" name="password">
+                    <input type="password" id="input-group-2" class="bg-gray-50 border border-gray-800 text-gray-900 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-100 dark:border-gray-400 dark:placeholder-gray-500 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="********" name="password" required>
                 </div>
 
                 <input type="submit" value="Entrar" class="bg-[#19231F] hover:bg-green-900 w-full my-3 p-2 rounded-lg text-white font-medium transition-colors duration-300">
