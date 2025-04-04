@@ -22,5 +22,9 @@ class DatabaseSeeder extends Seeder
             'cpf' => '00000000000',
             'tel' => '99999999999'
         ]);
+
+        $this->call([
+            CategoriesSeeder::class,
+        ]);
     }
 }
