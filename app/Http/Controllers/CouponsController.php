@@ -2,16 +2,26 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Coupons;
 use Illuminate\Http\Request;
 
 class CouponsController extends Controller
 {
+
+    public readonly Coupons $coupons;
+    public function __construct()
+    {
+        $this->coupons = new Coupons();
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $coupons = $this->coupons->all();
+
+        return view('coupons.coupons', ['coupons' => $coupons]);
     }
 
     /**
