@@ -44,7 +44,7 @@
                                                 Editar
                                             </a>
 
-                                            <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post" onsubmit="return confirm('Tem certeza que deseja apagar a categoria: name?');">
+                                            <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post" onsubmit="return confirm('Tem certeza que deseja apagar a categoria: {{ $category->name }}?');">
                                                 @csrf
                                                 <input type="hidden" name="_method" value="delete">
                                                 <button type="submit" class="bg-red-600 py-2 px-4 rounded-lg text-white font-medium shadow-md hover:bg-red-500 transition duration-300">

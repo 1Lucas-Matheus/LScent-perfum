@@ -47,14 +47,6 @@ class CategoriesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
@@ -65,7 +57,7 @@ class CategoriesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -73,8 +65,14 @@ class CategoriesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $destroy = $this->categories->destroy($id);
+
+        if ($destroy) {
+            return redirect()->route('categories.index')->with('messageSuccess', 'Categoria excluída com êxito.');
+        } else {
+            return redirect()->route('categories.index')->with('messageError', 'Não foi possivel exluir a Categoria.');
+        }
     }
 }
