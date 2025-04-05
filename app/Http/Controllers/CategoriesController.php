@@ -51,7 +51,11 @@ class CategoriesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $category = $this->categories->find($id);
+
+        return view('category.partials.edit', [
+            'category' => $category
+        ]);
     }
 
     /**
@@ -59,7 +63,13 @@ class CategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $update = $this->categories->where('id', $id)->update($request->except(['_token', '_method']));
+
+        if ($update) {
+            return redirect()->route('categories.index')->with('messageSuccess', 'A categoria foi atualizada com êxito.');
+        } else {
+            return redirect()->route('categories.index')->with('messageError', 'Não foi possivel atualizar a categoria.');
+        }
     }
 
     /**
