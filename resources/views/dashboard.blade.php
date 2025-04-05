@@ -9,76 +9,80 @@
     @include('layouts.sidebar')
 </head>
 
-<body>
+<body class="bg-gray-100 text-gray-800">
     <div class="sidebar">
         @yield('sidebar')
     </div>
 
     <div class="p-4 sm:ml-64">
-        <div class="p-4">
-            <div class=" h-48 mb-4">
+        <div class="px-4">
+            <div>
                 <div class="max-w-7xl mx-auto">
                     <h1 class="text-3xl font-bold mb-6">Dashboard</h1>
 
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
                         <div class="bg-white p-4 rounded-lg shadow-md">
-                            <h2 class="text-lg font-semibold">Variedade de Produtos</h2>
-                            <p class="text-2xl font-bold">{{ $countProducts }}</p>
+                            <h2 class="text-sm font-semibold text-gray-500 mb-2">Variedade de Produtos</h2>
+                            <p class="text-3xl font-bold text-gray-800">{{ $countProducts }}</p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow-md">
-                            <h2 class="text-lg font-semibold">Categorias Disponíveis</h2>
-                            <p class="text-2xl font-bold">{{ $countCategory }} </p>
+                            <h2 class="text-sm font-semibold text-gray-500 mb-2">Categorias Disponíveis</h2>
+                            <p class="text-3xl font-bold text-gray-800">{{ $countCategory }} </p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow-md">
-                            <h2 class="text-lg font-semibold">Cupons Ativos</h2>
-                            <p class="text-2xl font-bold">{{ $countCoupons }}</p>
+                            <h2 class="text-sm font-semibold text-gray-500 mb-2">Cupons Ativos</h2>
+                            <p class="text-3xl font-bold text-gray-800">{{ $countCoupons }}</p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow-md">
-                            <h2 class="text-lg font-semibold">Usuários Cadastrados</h2>
-                            <p class="text-2xl font-bold">{{ $countUsers }}</p>
+                            <h2 class="text-sm font-semibold text-gray-500 mb-2">Usuários Cadastrados</h2>
+                            <p class="text-3xl font-bold text-gray-800">{{ $countUsers }}</p>
                         </div>
                     </div>
 
                     <div class="mb-6">
-                        <h2 class="text-xl font-semibold mb-4 text-gray-800">Perfume com estoque baixo</h2>
-                        <div class="bg-white rounded-2xl shadow-lg">
-                            <table class="w-full text-sm text-left border-collapse">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                        <h2 class="text-2xl font-semibold mb-4">Perfumes com Estoque Baixo</h2>
+                        <div class="bg-white rounded-2xl shadow overflow-hidden">
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-xs uppercase bg-gray-100 text-gray-600">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3">Nome do Perfume</th>
-                                        <th scope="col" class="px-6 py-3">Preço original</th>
-                                        <th scope="col" class="px-6 py-3">Preço na promoção</th>
-                                        <th scope="col" class="px-6 py-3">Categoria</th>
-                                        <th scope="col" class="px-6 py-3">Promoção</th>
-                                        <th scope="col" class="px-6 py-3">Estoque</th>
+                                        <th class="px-6 py-3">Nome</th>
+                                        <th class="px-6 py-3">Preço Original</th>
+                                        <th class="px-6 py-3">Preço com Desconto</th>
+                                        <th class="px-6 py-3">Categoria</th>
+                                        <th class="px-6 py-3">Promoção</th>
+                                        <th class="px-6 py-3">Estoque</th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-gray-200 bg-white">
+                                <tbody class="divide-y divide-gray-200">
                                     @if($products->where('quantity', '<=', 5)->count() > 0)
                                         @foreach($products->where('quantity', '<=', 5)->take(5) as $product)
                                             <tr class="hover:bg-gray-50 transition">
-                                                <td class="px-6 py-4 font-medium text-gray-900">{{ $product->name }}</td>
-                                                <td class="px-6 py-4 text-gray-700"> R$ {{ number_format($product->price, 2, ',', '.') }} </td>
-                                                <td class="px-6 py-4 text-gray-700">
+                                                <td class="px-6 py-4 font-medium">{{ $product->name }}</td>
+                                                <td class="px-6 py-4">R$ {{ number_format($product->price, 2, ',', '.') }}</td>
+                                                <td class="px-6 py-4">
                                                     @if($product->promo > 0)
                                                     R$ {{ number_format($product->price - ($product->price * ($product->promo / 100)), 2, ',', '.') }}
                                                     @else
-                                                    sem promoção
+                                                    <span class="text-gray-400 italic">Sem promoção</span>
                                                     @endif
                                                 </td>
-                                                <td class="px-6 py-4 text-gray-700">{{ $product->category->name }}</td>
-                                                <td class="px-6 py-4 text-gray-700"> @if($product->promo > 0) {{ $product->promo / 1 }}% @else ❌ @endif </td>
-                                                <td class="px-6 py-4 text-gray-700"> {{ $product->quantity }} </td>
+                                                <td class="px-6 py-4">{{ $product->category->name }}</td>
+                                                <td class="px-6 py-4">{{ $product->promo > 0 ? $product->promo.'%' : '❌' }}</td>
+                                                <td class="px-6 py-4">{{ $product->quantity }}</td>
                                             </tr>
                                             @endforeach
+
                                             <tr>
-                                                <td class="px-6 py-4 text-gray-700" colspan="6">
-                                                    <strong>Atenção:</strong> mais <span class="text-red-700 font-semibold">{{ $remainingLowStock }}</span> produto com estoque baixo.
-                                                    <a href="{{ route('products.index') }}" class="relative text-blue-500 hover:text-blue-700 before:content-[''] before:absolute before:left-0 before:bottom-0 before:w-full before:h-[2px] before:bg-blue-700 before:scale-x-0 before:origin-left before:transition-transform before:duration-300 hover:before:scale-x-100">Ver mais</a>
+                                                <td class="px-6 py-4 text-sm text-gray-600" colspan="6">
+                                                    <strong>Atenção:</strong> mais
+                                                    <span class="text-red-700 font-semibold">{{ $remainingLowStock }}</span> produto(s) com estoque baixo.
+                                                    <a href="{{ route('products.index') }}" class="ml-2 text-blue-600 hover:underline">Ver mais</a>
                                                 </td>
                                             </tr>
                                             @else
-                                            <p class="text-gray-500 text-sm">Nenhum perfume com estoque baixo.</p>
+                                            <tr>
+                                                <td colspan="6" class="px-6 py-4 text-center text-gray-500">Nenhum perfume com estoque baixo.</td>
+                                            </tr>
                                             @endif
                                 </tbody>
                             </table>
@@ -86,47 +90,43 @@
                     </div>
 
                     <div class="mb-6">
-                        <h2 class="text-xl font-semibold mb-4 text-gray-800">Perfume Mais Vendido</h2>
-                        <div class="bg-white rounded-2xl shadow-lg">
-                            <table class="w-full text-sm text-left border-collapse">
-                                <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                        <h2 class="text-2xl font-semibold mb-4">Perfume Mais Vendido</h2>
+                        <div class="bg-white rounded-2xl shadow overflow-hidden">
+                            <table class="w-full text-sm text-left">
+                                <thead class="text-xs uppercase bg-gray-100 text-gray-600">
                                     <tr>
-                                        <th scope="col" class="px-6 py-3">Nome do Perfume</th>
-                                        <th scope="col" class="px-6 py-3">Categoria</th>
-                                        <th scope="col" class="px-6 py-3">Preço</th>
-                                        <th scope="col" class="px-6 py-3">Promoção</th>
+                                        <th class="px-6 py-3">Nome do Perfume</th>
+                                        <th class="px-6 py-3">Categoria</th>
+                                        <th class="px-6 py-3">Preço</th>
+                                        <th class="px-6 py-3">Promoção</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
-                                    <tr class="hover:bg-gray-50 transition">
-                                        <td class="px-6 py-4 font-medium text-gray-900 text-center" colspan="6"> Nenhuma compra foi realizada até o momento. </td>
-
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-center text-gray-500" colspan="6">Nenhuma compra foi realizada até o momento.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
 
-                    <div class="mb-6">
-                        <h2 class="text-xl font-semibold mb-4 text-gray-800">Categorias Mais Vendidas</h2>
-                        <div class="bg-white rounded-2xl shadow-lg">
-                            <table class="w-full text-sm text-left border-collapse">
-                                <tbody class="divide-y divide-gray-200 bg-white">
-                                    <tr class="hover:bg-gray-50 transition">
-                                        <td class="px-6 py-4 font-medium text-gray-900 text-center" colspan="6"> Nenhuma compra foi realizada até o momento. </td>
-
-                                    </tr>
+                    <div class="mb-2">
+                        <h2 class="text-2xl font-semibold mb-4">Categorias Mais Vendidas</h2>
+                        <div class="bg-white rounded-2xl shadow overflow-hidden">
+                            <table class="w-full text-sm text-left">
+                                <tbody class="divide-y divide-gray-200">
+                                    <tr class="hover:bg-gray-50">
+                                        <td class="px-6 py-4 text-center text-gray-500" colspan="6">Nenhuma compra foi realizada até o momento.</td>
                                     </tr>
                                 </tbody>
-
                             </table>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
-
 </body>
 
 </html>
