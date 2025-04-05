@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
@@ -23,19 +23,49 @@
                     <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
                         <div class="bg-white p-4 rounded-lg shadow-md">
                             <h2 class="text-lg font-semibold">Perfumes em estoque</h2>
-                            <p class="text-2xl font-bold">estoque</p>
+                            <p class="text-2xl font-bold">{{ $countUsers }}</p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow-md">
                             <h2 class="text-lg font-semibold">Categorias</h2>
-                            <p class="text-2xl font-bold">categoriesCount</p>
+                            <p class="text-2xl font-bold">{{ $countCategory }} </p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow-md">
-                            <h2 class="text-lg font-semibold">Promoções Ativas</h2>
-                            <p class="text-2xl font-bold">promocoes</p>
+                            <h2 class="text-lg font-semibold">Cupons Ativas</h2>
+                            <p class="text-2xl font-bold">{{ $countCoupons }}</p>
                         </div>
                         <div class="bg-white p-4 rounded-lg shadow-md">
                             <h2 class="text-lg font-semibold">Usuários</h2>
-                            <p class="text-2xl font-bold">ususarios</p>
+                            <p class="text-2xl font-bold">{{ $countUsers }}</p>
+                        </div>
+                    </div>
+
+                    <div class="mb-6">
+                        <h2 class="text-xl font-semibold mb-4 text-gray-800">Perfume com estoque baixo</h2>
+                        <div class="bg-white rounded-2xl shadow-lg">
+                            <table class="w-full text-sm text-left border-collapse">
+                                <thead class="text-xs text-gray-700 uppercase bg-gray-100">
+                                    <tr>
+                                        <th scope="col" class="px-6 py-3">Nome do Perfume</th>
+                                        <th scope="col" class="px-6 py-3">Categoria</th>
+                                        <th scope="col" class="px-6 py-3">Preço</th>
+                                        <th scope="col" class="px-6 py-3">Promoção</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-200 bg-white">
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-6 py-4 font-medium text-gray-900">NEM UMA COMPRA FOI FEITA AINDA</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-6 py-4 font-medium text-gray-900">NEM UMA COMPRA FOI FEITA AINDA</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-6 py-4 font-medium text-gray-900">NEM UMA COMPRA FOI FEITA AINDA</td>
+                                    </tr>
+                                    <tr class="hover:bg-gray-50 transition">
+                                        <td class="px-6 py-4 font-medium text-gray-900">NEM UMA COMPRA FOI FEITA AINDA</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 

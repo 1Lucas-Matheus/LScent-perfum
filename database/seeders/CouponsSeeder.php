@@ -14,11 +14,11 @@ class CouponsSeeder extends Seeder
     public function run(): void
     {
         DB::table('coupons')->insert([
-            ['value' => 10, 'key' => '1'],
-            ['value' => 20, 'key' => '2'],
-            ['value' => 30, 'key' => '3'],
-            ['value' => 40, 'key' => '4'],
-            ['value' => 50, 'key' => '5']
+            ['value' => 10, 'key' => '7nzUx-NTrYW4'],
+            ['value' => 20, 'key' => 'jQ2I7-IwFUKr'],
+            ['value' => 30, 'key' => 'pPeS@-$C7CrH'],
+            ['value' => 40, 'key' => 'E8eRh-jVV@eR'],
+            ['value' => 50, 'key' => 'Gy0Xk-39ufBu']
         ]);
     }
 }

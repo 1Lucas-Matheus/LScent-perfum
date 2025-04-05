@@ -29,7 +29,7 @@ class CouponsController extends Controller
      */
     public function create()
     {
-        //
+        return view('coupons.partials.create');
     }
 
     /**
@@ -37,7 +37,23 @@ class CouponsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'key' => ['required', 'string', 'size:12'],
+            'value' => ['required', 'integer', 'min:1', 'max:100'],
+        ]);
+
+        $coupons = $this->coupons->create([
+            'key' => $request->key,
+            'value' => $request->value
+        ]);
+
+        if ($coupons) 
+        {
+            return redirect()->route('coupons.index')->with('messageSuccess', 'Cupom criada com êxito.');
+        } else
+        {
+            return redirect()->route('coupons.index')->with('messageError', 'Falha ao criar cupom');
+        }
     }
 
     /**
@@ -69,6 +85,12 @@ class CouponsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $destroy = $this->coupons->destroy($id);
+
+        if ($destroy) {
+            return redirect()->route('coupons.index')->with('messageSuccess', 'Cupom excluído com êxito.');
+        } else {
+            return redirect()->route('coupons.index')->with('messageError', 'Não foi possivel exluir a cupom.');
+        }
     }
 }
