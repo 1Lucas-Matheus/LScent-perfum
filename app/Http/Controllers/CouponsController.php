@@ -60,17 +60,27 @@ class CouponsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $coupom = $this->coupons->find($id);
+
+        return view('coupons.partials.edit', [
+            'coupom' => $coupom,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $update = $this->coupons->where('id', $id)->update($request->except(['_token', '_method']));
+
+        if ($update) {
+            return redirect()->route('coupons.index')->with('messageSuccess', 'O cupom foi atualizada com êxito.');
+        } else {
+            return redirect()->route('coupons.index')->with('messageError', 'Não foi possivel atualizar a cupom.');
+        }
     }
 
     /**
