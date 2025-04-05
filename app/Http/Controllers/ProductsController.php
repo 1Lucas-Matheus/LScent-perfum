@@ -65,7 +65,13 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $products = $this->products->find($id);
+        $categories = Categories::all();
+
+        return view('products.partials.edit', [
+            'products' => $products,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -73,7 +79,13 @@ class ProductsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $update = $this->products->where('id', $id)->update($request->except(['_token', '_method']));
+
+        if ($update) {
+            return redirect()->route('products.index')->with('messageSuccess', 'O produto foi atualizada com êxito.');
+        } else {
+            return redirect()->route('products.index')->with('messageError', 'Não foi possivel atualizar a produto.');
+        }
     }
 
     /**
