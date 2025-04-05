@@ -32,20 +32,29 @@
                                 <thead class="text-xs text-gray-700 uppercase bg-gray-100">
                                     <tr>
                                         <th scope="col" class="px-6 py-3">Nome do Perfume</th>
-                                        <th scope="col" class="px-6 py-3">Preço</th>
+                                        <th scope="col" class="px-6 py-3">Preço original</th>
+                                        <th scope="col" class="px-6 py-3">Preço na promoção</th>
                                         <th scope="col" class="px-6 py-3">Categoria</th>
                                         <th scope="col" class="px-6 py-3">Promoção</th>
+                                        <th scope="col" class="px-6 py-3">Estoque</th>
+                                        <th scope="col" class="px-6 py-3">Açãos</th>
                                     </tr>
                                 </thead>
                                 <tbody class="divide-y divide-gray-200 bg-white">
                                     @foreach($products as $product)
                                     <tr class="hover:bg-gray-50 transition">
                                         <td class="px-6 py-4 font-medium text-gray-900">{{ $product->name }}</td>
-                                        <td class="px-6 py-4 text-gray-700">@if($product->promo > 0) {{ $product->price - ( $product->price * ($product->promo / 100)) }} @else {{$product->price}} @endif</td>
-                                        <td class="px-6 py-4 text-gray-700">{{ $product->category->name }}</td>
+                                        <td class="px-6 py-4 text-gray-700"> R$ {{ number_format($product->price, 2, ',', '.') }} </td>
                                         <td class="px-6 py-4 text-gray-700">
-                                            <span class="font-semibold">@if($product->promo > 0) {{ $product->promo / 1 }}% @else ❌ @endif</span>
+                                            @if($product->promo > 0)
+                                                R$ {{ number_format($product->price - ($product->price * ($product->promo / 100)), 2, ',', '.') }}
+                                            @else
+                                                sem promoção
+                                            @endif
                                         </td>
+                                        <td class="px-6 py-4 text-gray-700">{{ $product->category->name }}</td>
+                                        <td class="px-6 py-4 text-gray-700"> @if($product->promo > 0) {{ $product->promo / 1 }}% @else ❌ @endif </td>
+                                        <td class="px-6 py-4 text-gray-700"> {{ $product->quantity }} </td>
                                         <td class="px-6 py-4 text-right flex justify-end space-x-3">
                                             <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="bg-blue-600 py-2 px-4 rounded-lg text-white font-medium shadow-md hover:bg-blue-500 transition duration-300" type="button">
                                                 Editar

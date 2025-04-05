@@ -14,10 +14,10 @@ class ProductsSeeder extends Seeder
     public function run(): void
     {
         DB::table('products')->insert([
-            ['name' => 'Malbec X', 'quantity' => 10, 'price' => 299.99, 'category_id' => 1, 'promo' => 0],
-            ['name' => 'Luna', 'quantity' => 10, 'price' => 299.99, 'category_id' => 1, 'promo' => 0],
-            ['name' => 'Malbec Flame', 'quantity' => 10, 'price' => 299.99, 'category_id' => 1, 'promo' => 0],
-            ['name' => 'Ilia', 'quantity' => 10, 'price' => 299.99, 'category_id' => 1, 'promo' => 0],
+            ['name' => 'Malbec X', 'quantity' => 1, 'price' => 299.99, 'category_id' => 1, 'promo' => 0],
+            ['name' => 'Luna', 'quantity' => 3, 'price' => 299.99, 'category_id' => 1, 'promo' => 0],
+            ['name' => 'Malbec Flame', 'quantity' => 2, 'price' => 299.99, 'category_id' => 1, 'promo' => 0],
+            ['name' => 'Ilia', 'quantity' => 5, 'price' => 299.99, 'category_id' => 1, 'promo' => 0],
             ['name' => 'Homen essence', 'quantity' => 10, 'price' => 299.99, 'category_id' => 1, 'promo' => 0]
         ]);
     }

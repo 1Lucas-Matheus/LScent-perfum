@@ -33,7 +33,9 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Categories::all();
+
+        return view('products.partials.create', ['categories' => $categories]);
     }
 
     /**
@@ -41,7 +43,21 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $create = Products::create([
+            'name' => $request->input('name'),
+            'price' => $request->input('price'),
+            'category_id' => $request->input('category_id'),
+            'quantity' => $request->input('quantity'),
+            'promo' => $request->input('promo') ?? 0
+        ]);
+
+        if($create)
+        {
+            return redirect()->route('products.index')->with(['messageSuccess', 'Produto criada com êxito.']);
+        } else
+        {
+            return redirect()->route('products.index')->with(['messageError', 'Não foi possivel criar o produto.']);
+        }
     }
 
     /**

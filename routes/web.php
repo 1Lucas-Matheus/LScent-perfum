@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Categories;
 use App\Models\Coupons;
+use App\Models\Products;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -17,11 +18,24 @@ Route::get('/dashboard', function () {
     $countUsers = User::count();
     $countCoupons = Coupons::count();
     $countCategory = Categories::count();
+    $countProducts = Products::Count();
+
+    $lowStockProducts = Products::where('quantity', '<=', 5)->take(5)->get();
+    $totalLowStock = Products::where('quantity', '<=', 5)->count();
+    $remainingLowStock = max(0, $totalLowStock - $lowStockProducts->count());
+
+    $products = Products::all();
+    $categories = Categories::all();
 
     return view('dashboard', [
         'countUsers' => $countUsers,
         'countCoupons' => $countCoupons,
         'countCategory' => $countCategory,
+        'countProducts' => $countProducts,
+        'products' => $products,
+        'categories' => $categories,
+        'lowStockProducts' => $lowStockProducts,
+        'remainingLowStock' => $remainingLowStock
     ]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -55,4 +69,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
