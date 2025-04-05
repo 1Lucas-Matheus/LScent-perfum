@@ -61,14 +61,6 @@ class ProductsController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
@@ -87,8 +79,14 @@ class ProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $destroy = $this->products->destroy($id);
+
+        if ($destroy) {
+            return redirect()->route('products.index')->with('messageSuccess', 'Produto excluído com êxito.');
+        } else {
+            return redirect()->route('products.index')->with('messageError', 'Não foi possivel exluir o produto.');
+        }
     }
 }

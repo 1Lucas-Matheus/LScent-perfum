@@ -8,7 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="{{ asset('js/modal.js') }}"></script>
 
-    @include('components.sidebar')
+    @include('layouts.sidebar')
     @include('components.messageAlert')
 
 </head>

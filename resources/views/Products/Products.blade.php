@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>products</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    @include('components.sidebar')
+    @include('layouts.sidebar')
     @include('components.messageAlert')
 </head>
 
@@ -21,7 +21,7 @@
             <div class=" h-48 mb-4">
                 <div class="max-w-7xl mx-auto">
                     <div class="mb-6">
-                        <h2 class="text-xl font-semibold mb-4 text-gray-800">products</h2>
+                        <h2 class="text-xl font-semibold mb-4 text-gray-800">Produtos</h2>
 
                         <div class="messageAlert">
                             @yield('messageAlert')
