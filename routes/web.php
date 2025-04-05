@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CouponsController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Models\Categories;
 use App\Models\Coupons;
@@ -30,11 +31,12 @@ route::get('/categories/{category}/edit', [CategoriesController::class, 'edit'])
 route::put('/categories/{category}', [CategoriesController::class, 'update'])->middleware(['auth', 'verified'])->name('categories.update');
 route::delete('/categories/{category}', [CategoriesController::class, 'destroy'])->middleware(['auth', 'verified'])->name('categories.destroy');
 
-route::get('/categories', [CategoriesController::class, 'index'])->middleware(['auth', 'verified'])->name('categories.index');
-route::post('/categories', [CategoriesController::class, 'store'])->middleware(['auth', 'verified'])->name('categories.store');
-route::get('/categories/{category}/edit', [CategoriesController::class, 'edit'])->middleware(['auth', 'verified'])->name('categories.edit');
-route::put('/categories/{category}', [CategoriesController::class, 'update'])->middleware(['auth', 'verified'])->name('categories.update');
-route::delete('/categories/{category}', [CategoriesController::class, 'destroy'])->middleware(['auth', 'verified'])->name('categories.destroy');
+route::get('/products', [ProductsController::class, 'index'])->middleware(['auth', 'verified'])->name('products.index');
+route::get('/products/create', [ProductsController::class, 'create'])->middleware(['auth', 'verified'])->name('products.create');
+route::post('/products', [ProductsController::class, 'store'])->middleware(['auth', 'verified'])->name('products.store');
+route::get('/products/{product}/edit', [ProductsController::class, 'edit'])->middleware(['auth', 'verified'])->name('products.edit');
+route::put('/products/{product}', [ProductsController::class, 'update'])->middleware(['auth', 'verified'])->name('products.update');
+route::delete('/products/{product}', [ProductsController::class, 'destroy'])->middleware(['auth', 'verified'])->name('products.destroy');
 
 route::get('/coupons', [CouponsController::class, 'index'])->middleware(['auth', 'verified'])->name('coupons.index');
 route::get('/coupons/create', [CouponsController::class, 'create'])->middleware(['auth', 'verified'])->name('coupons.create');
