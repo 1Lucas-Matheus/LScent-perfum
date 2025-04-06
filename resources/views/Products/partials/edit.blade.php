@@ -24,13 +24,13 @@
 
                 <input type="hidden" name="_method" value="put">
                 <label for="input-group-1" class="block mb-2 text-sm text-gray-900">Nome do produto</label>
-                <input type="text" id="input-group-1" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-100 dark:border-gray-400 dark:placeholder-gray-500 dark:text-black" placeholder="Exemplo: Malbec X" name="name" value="{{ $products->name }}">
+                <input type="text" id="input-group-1" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-100 dark:border-gray-400 dark:placeholder-gray-500 dark:text-black" placeholder="Exemplo: Malbec X" name="name" value="{{ $products->name }}" required>
 
                 <label for="input-group-2" class="block my-2 text-sm text-gray-900">Quantidade</label>
-                <input type="number" id="input-group-2" class="bg-gray-50 border border-gray-800 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-100 dark:border-gray-400 dark:placeholder-gray-500 dark:text-black" placeholder="Exemplo: 5" name="quantity" value="{{ $products->quantity }}">
+                <input type="number" id="input-group-2" class="bg-gray-50 border border-gray-800 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-100 dark:border-gray-400 dark:placeholder-gray-500 dark:text-black" placeholder="Exemplo: 5" name="quantity" value="{{ $products->quantity }}" required>
 
                 <label for="input-group-2" class="block my-2 text-sm text-gray-900">Preço(Unidade)</label>
-                <input type="number" step="any" id="input-group-2" class="bg-gray-50 border border-gray-800 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-100 dark:border-gray-400 dark:placeholder-gray-500 dark:text-black" placeholder="Exemplo: 299,99" name="price" value="{{ $products->price }}">
+                <input type="number" step="any" id="input-group-2" class="bg-gray-50 border border-gray-800 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-100 dark:border-gray-400 dark:placeholder-gray-500 dark:text-black" placeholder="Exemplo: 299,99" name="price" value="{{ $products->price }}" required>
 
                 <label for="input-group-2" class="block my-2 text-sm text-gray-900">Categoria</label>
                 <select name="category_id" id="categorie" class="border rounded bg-gray-50 border-gray-800 text-gray-900 text-sm block w-full p-2.5 dark:bg-gray-100 dark:border-gray-400 dark:placeholder-gray-500 dark:text-black mb-4">
