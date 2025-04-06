@@ -7,6 +7,7 @@
     <title>Cadastro de Produto</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="{{ asset('js/offer.js') }}"></script>
+    @include('components.messageAlert')
 </head>
 
 <body class="bg-white flex min-h-screen">
@@ -14,23 +15,9 @@
         <div class="bg-white w-[400px] flex flex-col rounded-lg px-10 shadow-[10px_10px_30px_rgba(0,0,0,0.2)] items-center justify-center">
             <h1 class="text-gray-900 my-6 text-4xl font-semibold text-center">Novo Produto</h1>
 
-            @if(session('messageError') || session('messageSuccess'))
-            <div class="flex items-center p-4 mb-4 text-sm @if(session('messageSuccess')) text-green-800 @endif @if(session('messageError')) text-red-800 @endif rounded-lg @if(session('messageSuccess')) bg-green-50 @endif @if(session('messageError')) bg-red-50 @endif shadow-[0px_10px_30px_rgba(0,0,0,0.2)]" role="alert">
-                <svg class="shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-                </svg>
-                <span class="sr-only">Info</span>
-                <div>
-                    @if(session('messageSuccess'))
-                    <span class="font-medium">Sucesso! </span>{{session('messageSuccess')}}
-                    @endif
-
-                    @if(session('messageError'))
-                    <span class="font-medium">Falha! </span>{{session('messageError')}}
-                    @endif
-                </div>
+            <div class="messageAlert mb-4">
+                @yield('messageAlert')
             </div>
-            @endif
 
             <form action="{{ route('products.store') }}" method="post" class="w-full flex flex-col">
                 @csrf
@@ -48,7 +35,7 @@
                 <select id="category" name="category_id" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 mb-3" required>
                     <option value="" disabled selected>Selecione uma categoria</option>
                     @foreach($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
 

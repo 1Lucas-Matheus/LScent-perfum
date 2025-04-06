@@ -43,27 +43,37 @@ class ProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $create = Products::create([
-            'name' => $request->input('name'),
-            'price' => $request->input('price'),
-            'category_id' => $request->input('category_id'),
-            'quantity' => $request->input('quantity'),
-            'promo' => $request->input('promo') ?? 0
+        if (empty($request->name) || empty($request->price) || empty($request->category_id) || empty($request->quantity)) {
+            return redirect()->route('products.create')->with('messageError', 'Preencha todos os campos obrigatórios.');
+        }
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'category_id' => ['required', 'integer'],
+            'price' => ['required', 'numeric', 'regex:/^\d{1,6}(\.\d{1,2})?$/'],
+            'promo' => ['nullable', 'numeric', 'between:1,100'],
+            'quantity' => ['required', 'integer'],
         ]);
 
-        if($create)
-        {
+        $create = Products::create([
+            'name' => $request->name,
+            'price' => $request->price,
+            'category_id' => $request->category_id,
+            'quantity' => $request->quantity,
+            'promo' => $request->promo ?? 0
+        ]);
+
+        if ($create) {
             return redirect()->route('products.index')->with('messageSuccess', 'Produto criada com êxito.');
-        } else
-        {
-            return redirect()->route('products.index')->with(['messageError', 'Não foi possivel criar o produto.']);
+        } else {
+            return redirect()->route('products.index')->with('messageError', 'Não foi possivel criar o produto.');
         }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         $products = $this->products->find($id);
         $categories = Categories::all();
@@ -77,8 +87,12 @@ class ProductsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
+        if (empty($request->name) || empty($request->price) || empty($request->category_id) || empty($request->quantity)) {
+            return redirect()->route('products.edit', ['product' => $id])->with('messageError', 'Preencha todos os campos obrigatórios.');
+        }
+
         $update = $this->products->where('id', $id)->update($request->except(['_token', '_method']));
 
         if ($update) {

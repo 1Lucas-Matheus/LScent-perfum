@@ -6,15 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    @include('components.messageAlert')
 </head>
 
 <body class="bg-white flex min-h-screen">
     <div class="flex justify-center items-center w-full h-screen">
 
         <div class="bg-white w-[600px] h-auto py-4 flex flex-col rounded-lg px-10 shadow-[10px_10px_30px_rgba(0,0,0,0.5)] items-center justify-center">
-            <h1 class="text-slate-900 mb-7 mt-2 text-5xl font-bold">
-                Adiconar produto
-            </h1>
+            <h1 class="text-slate-900 mb-7 mt-2 text-5xl font-bold"> Adiconar produto </h1>
+
+            <div class="messageAlert mb-4">
+                @yield('messageAlert')
+            </div>
+            
             <form action="{{ route('products.update', ['product' => $products->id]) }}" method="post" class="w-full h-full flex flex-col">
                 @csrf
 
