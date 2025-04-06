@@ -38,7 +38,6 @@
                                 <td class="px-6 py-4 font-medium text-gray-900">{{ $coupom->key }}</td>
                                 <td class="px-6 py-4 text-gray-700">{{ $coupom->value }}%</td>
                                 <td class="px-6 py-4 text-right flex justify-end items-center gap-3">
-                                    {{-- Botão de Editar --}}
                                     <a href="{{ route('coupons.edit', ['coupom' => $coupom->id]) }}"
                                         class="p-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white shadow transition flex items-center justify-center"
                                         title="Editar cupom">
@@ -48,7 +47,7 @@
                                     <form action="{{ route('coupons.destroy', ['coupom' => $coupom->id]) }}" method="POST"
                                         onsubmit="return confirm('Tem certeza que deseja apagar o cupom de {{ $coupom->value }}%?');">
                                         @csrf
-                                        @method('DELETE')
+                                        <input type="hidden" name="_method" value="delete">
                                         <button type="submit"
                                             class="p-2 rounded-lg bg-red-600 hover:bg-red-500 text-white shadow transition flex items-center justify-center"
                                             title="Excluir cupom">

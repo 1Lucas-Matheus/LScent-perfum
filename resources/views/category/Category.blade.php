@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body class="bg-gray-100 text-gray-800">
 
     <div class="sidebar">
         @yield('sidebar')
@@ -41,23 +41,14 @@
                                         </td>
                                         <td class="px-6 py-4 text-right flex justify-end space-x-3">
                                             <a href="{{ route('categories.edit', ['category' => $category->id]) }}" class="bg-blue-600 py-2 px-4 rounded-lg text-white font-medium shadow-md hover:bg-blue-500 transition duration-300" type="button">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke="none" class="w-5 h-5">
-                                                    <path d="M16.862 3.487a2 2 0 012.828 0l.823.823a2 2 0 010 2.828l-1.414 1.414-3.651-3.651 1.414-1.414zm-2.828 2.828l3.651 3.651L7.914 19.737a2 2 0 01-.878.506l-4.029 1.15a.5.5 0 01-.623-.623l1.15-4.029a2 2 0 01.506-.878L14.034 6.315z" />
-                                                </svg>
-
+                                                <img src="{{ asset('Imgs/Icons/editar.png') }}" alt="Ícone de Senha" class="w-5 h-5 text-gray-500 dark:text-gray-400">
                                             </a>
 
                                             <form action="{{ route('categories.destroy', ['category' => $category->id]) }}" method="post" onsubmit="return confirm('Tem certeza que deseja apagar a categoria: {{ $category->name }}?');">
                                                 @csrf
                                                 <input type="hidden" name="_method" value="delete">
                                                 <button type="submit" class="bg-red-600 py-2 px-4 rounded-lg text-white font-medium shadow-md hover:bg-red-500 transition duration-300">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                        <polyline points="3 6 5 6 20.9 6"></polyline>
-                                                        <path d="M19 6l-1 14H6L5 6"></path>
-                                                        <path d="M10 11v6"></path>
-                                                        <path d="M14 11v6"></path>
-                                                        <path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"></path>
-                                                    </svg>
+                                                    <img src="{{ asset('Imgs/Icons/bin.png') }}" alt="Ícone de Senha" class="w-5 h-5 text-gray-500 dark:text-gray-400">
                                                 </button>
                                             </form>
                                         </td>

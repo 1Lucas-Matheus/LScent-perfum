@@ -73,7 +73,7 @@
                                     <form action="{{ route('products.destroy', ['product' => $product->id]) }}" method="POST"
                                         onsubmit="return confirm('Tem certeza que deseja apagar: {{$product->name}}?');">
                                         @csrf
-                                        @method('DELETE')
+                                        <input type="hidden" name="_method" value="delete">
                                         <button type="submit" class="bg-red-600 hover:bg-red-500 text-white p-2 rounded-lg shadow transition">
                                             <img src="{{ asset('Imgs/Icons/bin.png') }}" alt="Ícone de Senha" class="w-5 h-5 text-gray-500 dark:text-gray-400">
                                         </button>
