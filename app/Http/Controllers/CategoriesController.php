@@ -31,7 +31,7 @@ class CategoriesController extends Controller
     {
 
         if (empty($request->name)) {
-            return redirect()->route('products.index')->with('messageError', 'Preencha todos os campos obrigatórios.');
+            return redirect()->route('categories.index')->with('messageError', 'Preencha todos os campos obrigatórios.');
         }
 
         $request->validate([
@@ -52,7 +52,7 @@ class CategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
         $category = $this->categories->find($id);
 

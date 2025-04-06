@@ -37,6 +37,10 @@ class CouponsController extends Controller
      */
     public function store(Request $request)
     {
+        if (empty($request->key) || empty($request->value)) {
+            return redirect()->route('products.index')->with('messageError', 'Preencha todos os campos obrigatórios.');
+        }
+
         $request->validate([
             'key' => ['required', 'string', 'size:12'],
             'value' => ['required', 'integer', 'min:1', 'max:100'],
@@ -74,6 +78,10 @@ class CouponsController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (empty($request->key) || empty($request->value)) {
+            return redirect()->route('coupons.edit', ['coupom' => $id])->with('messageError', 'Preencha todos os campos obrigatórios.');
+        }
+
         $update = $this->coupons->where('id', $id)->update($request->except(['_token', '_method']));
 
         if ($update) {

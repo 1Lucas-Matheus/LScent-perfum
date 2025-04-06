@@ -7,11 +7,16 @@
     <title>Criar Cupom</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="{{ asset('js/keyGenerator.js') }}"></script>
+    @include('components.messageAlert')
 </head>
 
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <main class="bg-white w-full max-w-md p-8 rounded-xl shadow-lg space-y-6">
         <h1 class="text-slate-900 text-center text-3xl font-bold">Criar Cupom</h1>
+
+        <div class="messageAlert mb-4">
+            @yield('messageAlert')
+        </div>
 
         <form action="{{ route('coupons.update', ['coupom' => $coupom->id]) }}" method="POST" class="space-y-5">
             @csrf
@@ -23,7 +28,7 @@
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <img src="{{ asset('Imgs/Icons/key.png') }}" alt="Ícone de Chave" class="w-5 h-5">
                     </div>
-                    <input type="text" id="key" name="key" placeholder="Exemplo: qWuPi-roS5cY" required class="pl-10 pr-3 py-2 w-full text-sm border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ $coupom->key }}">
+                    <input type="text" id="key" name="key" placeholder="Exemplo: qWuPi-roS5cY" class="pl-10 pr-3 py-2 w-full text-sm border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ $coupom->key }}" required>
                 </div>
             </div>
 
@@ -33,7 +38,7 @@
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <img src="{{ asset('Imgs/Icons/desconto.png') }}" alt="Ícone de desconto" class="w-5 h-5">
                     </div>
-                    <input type="number" min="1" max="100" id="value" name="value" placeholder="Exemplo: 50" required class="pl-10 pr-3 py-2 w-full text-sm border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ $coupom->value }}">
+                    <input type="number" min="1" max="100" id="value" name="value" placeholder="Exemplo: 50" class="pl-10 pr-3 py-2 w-full text-sm border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ $coupom->value }}" required>
                 </div>
             </div>
 
