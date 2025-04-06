@@ -47,17 +47,26 @@
                                         <td class="px-6 py-4 text-gray-700"> R$ {{ number_format($product->price, 2, ',', '.') }} </td>
                                         <td class="px-6 py-4 text-gray-700">
                                             @if($product->promo > 0)
-                                                R$ {{ number_format($product->price - ($product->price * ($product->promo / 100)), 2, ',', '.') }}
+                                            R$ {{ number_format($product->price - ($product->price * ($product->promo / 100)), 2, ',', '.') }}
                                             @else
-                                                sem promoção
+                                            sem promoção
                                             @endif
                                         </td>
-                                        <td class="px-6 py-4 text-gray-700">{{ $product->category->name }}</td>
+                                        <td class="px-6 py-4 text-gray-700">
+                                            @if($product->category)
+                                                {{ $product->category->name }}
+                                            @else
+                                                <span class="text-gray-400 italic">Sem categoria</span>
+                                            @endif
+                                        </td>
                                         <td class="px-6 py-4 text-gray-700"> @if($product->promo > 0) {{ $product->promo / 1 }}% @else ❌ @endif </td>
                                         <td class="px-6 py-4 text-gray-700"> {{ $product->quantity }} </td>
                                         <td class="px-6 py-4 text-right flex justify-end space-x-3">
                                             <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="bg-blue-600 py-2 px-4 rounded-lg text-white font-medium shadow-md hover:bg-blue-500 transition duration-300" type="button">
-                                                Editar
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke="none" class="w-5 h-5">
+                                                    <path d="M16.862 3.487a2 2 0 012.828 0l.823.823a2 2 0 010 2.828l-1.414 1.414-3.651-3.651 1.414-1.414zm-2.828 2.828l3.651 3.651L7.914 19.737a2 2 0 01-.878.506l-4.029 1.15a.5.5 0 01-.623-.623l1.15-4.029a2 2 0 01.506-.878L14.034 6.315z" />
+                                                </svg>
+
                                             </a>
 
                                             <form action="{{ route('products.destroy', ['product' => $product->id]) }}" method="post" onsubmit="return confirm('Tem certeza que deseja apagar a categoria: {{$product->name}}?');">

@@ -61,12 +61,19 @@
                                                 <td class="px-6 py-4">R$ {{ number_format($product->price, 2, ',', '.') }}</td>
                                                 <td class="px-6 py-4">
                                                     @if($product->promo > 0)
-                                                    R$ {{ number_format($product->price - ($product->price * ($product->promo / 100)), 2, ',', '.') }}
+                                                        R$ {{ number_format($product->price - ($product->price * ($product->promo / 100)), 2, ',', '.') }}
                                                     @else
-                                                    <span class="text-gray-400 italic">Sem promoção</span>
+                                                        <span class="text-gray-400 italic">Sem promoção</span>
                                                     @endif
                                                 </td>
-                                                <td class="px-6 py-4">{{ $product->category->name }}</td>
+                                                <td class="px-6 py-4">
+                                                    @if($product->category)
+                                                        {{ $product->category->name }}
+                                                    @else
+                                                        <span class="text-gray-400 italic">Sem categoria</span>
+                                                    @endif
+                                                </td>
+
                                                 <td class="px-6 py-4">{{ $product->promo > 0 ? $product->promo.'%' : '❌' }}</td>
                                                 <td class="px-6 py-4">{{ $product->quantity }}</td>
                                             </tr>
