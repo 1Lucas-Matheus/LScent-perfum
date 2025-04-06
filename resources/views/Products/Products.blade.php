@@ -67,7 +67,7 @@
                                 <td class="px-6 py-4">{{ $product->quantity }}</td>
                                 <td class="px-6 py-4 text-right flex justify-end gap-2">
                                     <a href="{{ route('products.edit', ['product' => $product->id]) }}" class="bg-blue-600 hover:bg-blue-500 p-2 rounded-lg shadow transition">
-                                            <img src="{{ asset('Imgs/Icons/editar.png') }}" alt="Ícone de Senha" class="w-5 h-5 text-gray-500 dark:text-gray-400">
+                                        <img src="{{ asset('Imgs/Icons/editar.png') }}" alt="Ícone de Senha" class="w-5 h-5 text-gray-500 dark:text-gray-400">
                                     </a>
 
                                     <form action="{{ route('products.destroy', ['product' => $product->id]) }}" method="POST"
@@ -75,7 +75,7 @@
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="bg-red-600 hover:bg-red-500 text-white p-2 rounded-lg shadow transition">
-                                            <img src="{{ asset('Imgs/Icons/bin (2).png') }}" alt="Ícone de Senha" class="w-5 h-5 text-gray-500 dark:text-gray-400">
+                                            <img src="{{ asset('Imgs/Icons/bin.png') }}" alt="Ícone de Senha" class="w-5 h-5 text-gray-500 dark:text-gray-400">
                                         </button>
                                     </form>
                                 </td>
