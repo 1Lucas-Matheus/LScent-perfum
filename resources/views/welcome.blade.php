@@ -8,12 +8,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-white flex p-6 lg:p-10 items-center lg:justify-center min-h-screen">
-    <div class="bg-white flex items-center justify-center w-full">
-        <div class="flex max-w-335px w-full flex-col-reverse lg:max-w-4xl lg:flex-row">
+<body class="flex items-center min-h-screen p-6 bg-white lg:p-10 lg:justify-center">
+    <div class="flex items-center justify-center w-full bg-white">
+        <div class="flex flex-col-reverse w-full max-w-335px lg:max-w-4xl lg:flex-row">
             <div class="leading-[50px] flex flex-1 flex-col lg:p-20 bg-[#fff] sm:bg-[#fff] rounded-bl-lg rounded-br-lg lg:rounded-tl-lg lg:rounded-br-none items-center lg:shadow-[-10px_10px_30px_rgba(0,0,0,0.5)]">
                 <h1 class="dark:text-[#383838] text-5xl font-extrabold mb-28 hidden sm:block">Bem vindo!</h1>
-                <div class="h-full w-full mt-1">
+                <div class="w-full h-full mt-1">
                     <a href="login" class="text-white bg-[#19231F] hover:bg-green-900 rounded-lg mb-3 flex items-center justify-center transition-colors duration-300 text-2xl p-2.5">Acessar</a>
                     <a href="register" class="text-white bg-[#19231F] hover:bg-green-900 rounded-lg flex items-center justify-center transition-colors duration-300 text-2xl p-2.5">Registrar</a>
                 </div>
