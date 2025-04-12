@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('reminders', function (Blueprint $table) {
             $table->id();
+            $table->string('reminder');
+            $table->date('date');
             $table->timestamps();
         });
     }

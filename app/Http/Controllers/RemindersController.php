@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reminders;
 use Illuminate\Http\Request;
 
 class RemindersController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
+    public readonly Reminders $reminders;
+    public function __construct()
+    {
+        $this->reminders = new Reminders();
+    }
+
     public function index()
     {
-        //
+        $reminders = $this->reminders->all();
+        return view('reminders.reminders', [
+            'reminders' => $reminders,
+        ]);
     }
 
     /**

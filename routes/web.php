@@ -4,6 +4,7 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RemindersController;
 use App\Models\Categories;
 use App\Models\Coupons;
 use App\Models\Products;
@@ -63,6 +64,13 @@ Route::middleware('auth')->group(function () {
     route::get('/coupons/{coupom}/edit', [CouponsController::class, 'edit'])->name('coupons.edit');
     route::put('/coupons/{coupom}', [CouponsController::class, 'update'])->name('coupons.update');
     route::delete('/coupons/{coupom}', [CouponsController::class, 'destroy'])->name('coupons.destroy');
+
+    route::get('/reminders', [RemindersController::class, 'index'])->name('reminders.index');
+    route::get('/reminders/create', [RemindersController::class, 'index'])->name('reminders.create');
+    route::post('/reminders', [RemindersController::class, 'index'])->name('reminders.store');
+    route::get('/reminders/{reminder}/edit', [RemindersController::class, 'index'])->name('reminders.edit');
+    route::put('/reminders/{reminder}', [RemindersController::class, 'index'])->name('reminders.update');
+    route::delete('/reminders/{reminder}', [RemindersController::class, 'index'])->name('reminders.destroy');
 });
 
 require __DIR__ . '/auth.php';
