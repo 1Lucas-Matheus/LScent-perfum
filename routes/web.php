@@ -66,11 +66,11 @@ Route::middleware('auth')->group(function () {
     route::delete('/coupons/{coupom}', [CouponsController::class, 'destroy'])->name('coupons.destroy');
 
     route::get('/reminders', [RemindersController::class, 'index'])->name('reminders.index');
-    route::get('/reminders/create', [RemindersController::class, 'index'])->name('reminders.create');
-    route::post('/reminders', [RemindersController::class, 'index'])->name('reminders.store');
-    route::get('/reminders/{reminder}/edit', [RemindersController::class, 'index'])->name('reminders.edit');
-    route::put('/reminders/{reminder}', [RemindersController::class, 'index'])->name('reminders.update');
-    route::delete('/reminders/{reminder}', [RemindersController::class, 'index'])->name('reminders.destroy');
+    route::get('/reminders/create', [RemindersController::class, 'create'])->name('reminders.create');
+    route::post('/reminders', [RemindersController::class, 'store'])->name('reminders.store');
+    route::get('/reminders/{reminder}/edit', [RemindersController::class, 'edit'])->name('reminders.edit');
+    route::put('/reminders/{reminder}', [RemindersController::class, 'update'])->name('reminders.update');
+    route::delete('/reminders/{reminder}', [RemindersController::class, 'destroy'])->name('reminders.destroy');
 });
 
 require __DIR__ . '/auth.php';

@@ -27,7 +27,7 @@ class RemindersController extends Controller
      */
     public function create()
     {
-        //
+        return view('reminders.partials.create');
     }
 
     /**
@@ -35,7 +35,27 @@ class RemindersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (empty($request->reminder) || empty($request->date)) {
+            return redirect()->route('reminders.index')->with('messageError', 'Preencha todos os campos obrigatórios.');
+        }
+
+        $request->validate([
+            'reminder' => ['required', 'string', 'max:255'],
+            'date' => ['required', 'date_format:d/m/Y'],
+        ]);
+
+        $reminder = $this->reminders->create([
+            'reminder' => $request->reminder,
+            'date' => $request->date
+        ]);
+
+        if ($reminder) 
+        {
+            return redirect()->route('reminders.index')->with('messageSuccess', 'Lembrete criada com êxito.');
+        } else
+        {
+            return redirect()->route('reminders.index')->with('messageError', 'Falha ao criar lembrete');
+        }
     }
 
     /**
