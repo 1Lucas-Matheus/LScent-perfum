@@ -6,14 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    @include('layouts.sidebar')
     @include('components.messageAlert')
 </head>
 
 <body class="flex min-h-screen bg-white">
-    <div class="flex items-center justify-center w-full h-screen">
 
-        <div class="bg-white w-[600px] h-auto py-4 flex flex-col rounded-lg px-10 shadow-[10px_10px_30px_rgba(0,0,0,0.5)] items-center justify-center">
-            <h1 class="mt-2 text-5xl font-bold text-slate-900 mb-7"> Adiconar produto </h1>
+    <div class="sidebar">
+        @yield('sidebar')
+    </div>
+
+    <div class="flex items-center justify-center w-full min-h-screen p-4 sm:ml-64 bg-gray-50">
+        <div class="bg-white w-full max-w-md flex flex-col rounded-lg px-10 py-8 shadow-[10px_10px_30px_rgba(0,0,0,0.1)]">
+            <h1 class="mb-6 text-3xl font-semibold text-center text-gray-900">Novo lembrete</h1>
 
             <div class="mb-4 messageAlert">
                 @yield('messageAlert')
