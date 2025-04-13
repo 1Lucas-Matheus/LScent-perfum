@@ -47,11 +47,25 @@ class ProductsController extends Controller
             return redirect()->route('products.create')->with('messageError', 'Preencha todos os campos obrigatórios.');
         }
 
+        $existingProduct = Products::where('name', $request->name)->first();
+
+        if ($existingProduct) {
+            return redirect()->route('products.create')->with('messageError', 'Já existe um produto com esse nome.');
+        }
+
+        $request->merge([
+            'price' => str_replace(',', '.', $request->price),
+        ]);
+
+        if($request->price > 9999.99){
+            return redirect()->route('products.create')->with('messageError', 'O preço não pode ser maior que 9999,99.');
+        }
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'category_id' => ['required', 'integer'],
-            'price' => ['required', 'numeric', 'regex:/^\d{1,6}(\.\d{1,2})?$/'],
-            'promo' => ['nullable', 'numeric', 'between:1,100'],
+            'price' => ['required', 'numeric', 'between:0, 9999.99'],
+            'promo' => ['nullable', 'numeric', 'between:0, 100'],
             'quantity' => ['required', 'integer'],
         ]);
 
@@ -60,15 +74,17 @@ class ProductsController extends Controller
             'price' => $request->price,
             'category_id' => $request->category_id,
             'quantity' => $request->quantity,
-            'promo' => $request->promo ?? 0
+            'promo' => $request->promo ?? 0,
         ]);
 
         if ($create) {
-            return redirect()->route('products.index')->with('messageSuccess', 'Produto criada com êxito.');
+            return redirect()->route('products.index')->with('messageSuccess', 'Produto criado com êxito.');
         } else {
-            return redirect()->route('products.index')->with('messageError', 'Não foi possivel criar o produto.');
+            return redirect()->route('products.index')->with('messageError', 'Não foi possível criar o produto.');
         }
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
@@ -92,6 +108,28 @@ class ProductsController extends Controller
         if (empty($request->name) || empty($request->price) || empty($request->category_id) || empty($request->quantity)) {
             return redirect()->route('products.edit', ['product' => $id])->with('messageError', 'Preencha todos os campos obrigatórios.');
         }
+
+        $exists = Products::where('name', $request->name)->where('id', '!=', $id)->exists();
+
+        if ($exists) {
+            return redirect()->route('products.edit', ['product' => $id])->with('messageError', 'Já existe outro produto com esse nome.');
+        }
+
+        $request->merge([
+            'price' => str_replace(',', '.', $request->price),
+        ]);
+
+        if($request->price > 9999.99){
+            return redirect()->route('products.edit', ['product' => $id])->with('messageError', 'O preço não pode ser maior que 9999,99.');
+        }
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'category_id' => ['required', 'integer'],
+            'price' => ['required', 'numeric', 'regex:/^\d{1,4}(\.\d{1,2})?$/'],
+            'promo' => ['nullable', 'numeric', 'min:0', 'max:100'],
+            'quantity' => ['required', 'integer'],
+        ]);
 
         $update = $this->products->where('id', $id)->update($request->except(['_token', '_method']));
 
