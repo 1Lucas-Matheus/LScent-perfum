@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Produto</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="{{ asset('js/offer.js') }}"></script>
+    <script src="https://unpkg.com/imask"></script>
     @include('layouts.sidebar')
     @include('components.messageAlert')
 </head>
@@ -31,11 +31,10 @@
                 <input type="text" id="name" name="name" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 mb-3" placeholder="Ex: Malbec X" required>
 
                 <label for="price" class="block mb-1 text-sm text-gray-900">Preço Unidade (R$)</label>
-                <input type="number" min="0" max="10000" step=".01" id="price" name="price" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 mb-3" placeholder="Ex: 199.90" required>
-
+                <input type="text" id="price" name="price" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 mb-3" placeholder="Ex: 199,90" required>
 
                 <label for="quantity" class="block mb-1 text-sm text-gray-900">Quantidade</label>
-                <input type="number" min="0" max="10000" step=".01" id="quantity" name="quantity" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 mb-3" placeholder="Ex: 199.90" required>
+                <input type="number" min="0" max="10000" step=".01" id="quantity" name="quantity" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 mb-3" placeholder="Ex: 20" required>
 
                 <label for="category" class="block mb-1 text-sm text-gray-900">Categoria</label>
                 <select id="category" name="category_id" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5 mb-3" required>
@@ -45,7 +44,6 @@
                     @endforeach
                 </select>
 
-
                 <div class="flex items-center">
                     <input type="checkbox" id="promo" name="promo" class="mr-2">
                     <label for="promo" class="text-gray-900">Aplicar desconto</label>
@@ -53,7 +51,7 @@
 
                 <div id="promo-price-container" class="hidden mt-3">
                     <label for="promo_price" class="block mb-1 text-sm text-gray-900">Desconto (%)</label>
-                    <input type="number" min="1" max="100" id="promo" name="promo" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Ex: 20">
+                    <input type="number" min="1" max="100" id="promo_price" name="promo_price" class="bg-gray-50 border text-gray-900 text-sm rounded-lg block w-full p-2.5" placeholder="Ex: 20">
                     <span class="text-sm text-gray-500">Informe o percentual de desconto. O valor final será calculado automaticamente.</span>
                 </div>
 
@@ -67,6 +65,19 @@
             </form>
         </div>
     </div>
+
+    <script>
+        var priceInput = document.getElementById('price');
+        IMask(priceInput, {
+            mask: Number,
+            scale: 2,
+            signed: false,
+            thousandsSeparator: '.',
+            padFractionalZeros: true,
+            normalizeZeros: true,
+            radix: ','
+        });
+    </script>
 </body>
 
 </html>
