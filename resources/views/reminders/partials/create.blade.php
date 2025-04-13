@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Produto</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="{{ asset('js/offer.js') }}"></script>
+    <script src="https://unpkg.com/imask"></script>
     @include('layouts.sidebar')
     @include('components.messageAlert')
 </head>
@@ -44,6 +44,14 @@
             </form>
         </div>
     </div>
+
+    <script>
+        const dateInput = document.getElementById('date');
+        IMask(dateInput, {
+            mask: '00/00/0000'
+        });
+    </script>
+
 </body>
 
 </html>
