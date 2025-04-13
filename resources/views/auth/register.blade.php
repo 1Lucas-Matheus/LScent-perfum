@@ -56,11 +56,16 @@
                     </div>
 
                     <label for="password" class="block my-2 text-sm text-gray-900">Senha</label>
-                    <div class="relative">
+                    <div class="relative flex">
                         <div class="absolute inset-y-0 flex items-center pointer-events-none start-0 ps-2">
                             <img src="{{ asset('Imgs/Icons/passwordIndicator.png') }}" alt="Ícone de Senha" class="w-6 h-6 text-gray-500 dark:text-gray-400">
                         </div>
-                        <input type="password" name="password" id="password" class="bg-gray-50 border border-gray-800 text-gray-900 text-sm rounded-lg block w-full ps-10 p-2.5 dark:bg-gray-100 dark:border-gray-400 dark:placeholder-gray-500 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="********" autocomplete="new-password" required>
+
+                        <input type="password" name="password" id="password" class="bg-gray-100 border border-gray-400 text-gray-900 text-sm rounded-l-lg ps-10 p-2.5 w-full focus:ring-blue-500 focus:border-blue-500" placeholder="********" autocomplete="new-password" required>
+
+                        <button type="button" onclick="togglePassword()" class="px-4 text-sm text-gray-700 transition bg-gray-300 border border-l-0 border-gray-400 rounded-r-lg hover:bg-gray-400">
+                            <img id="toggle-icon" src="{{ asset('Imgs/Icons/password.png') }}" alt="Ver Senha" class="w-5 h-5">
+                        </button>
                     </div>
 
                     <label for="password_confirmation" class="block my-2 text-sm text-gray-900">Confirmar Senha</label>
@@ -92,6 +97,19 @@
         IMask(document.getElementById('tel'), {
             mask: '(00) 000000000'
         });
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('toggle-icon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.src = "{{ asset('Imgs/Icons/secretPassword.png') }}";
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.src = "{{ asset('Imgs/Icons/password.png') }}";
+            }
+        }
     </script>
 </body>
 
