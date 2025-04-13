@@ -7,63 +7,71 @@
     <title>Criar Cupom</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script defer src="{{ asset('js/keyGenerator.js') }}"></script>
+    @include('layouts.sidebar')
     @include('components.messageAlert')
 </head>
 
-<body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <main class="bg-white w-full max-w-md p-8 rounded-xl shadow-lg space-y-6">
-        <h1 class="text-slate-900 text-center text-3xl font-bold">Criar Cupom</h1>
+<body class="flex min-h-screen bg-white">
 
-        <div class="messageAlert mb-4">
-            @yield('messageAlert')
-        </div>
+    <div class="sidebar">
+        @yield('sidebar')
+    </div>
 
-        <form action="{{ route('coupons.store') }}" method="POST" class="space-y-5">
+    <div class="flex items-center justify-center w-full min-h-screen p-4 sm:ml-64 bg-gray-50">
+        <div class="bg-white w-full max-w-md flex flex-col rounded-lg px-10 py-8 shadow-[10px_10px_30px_rgba(0,0,0,0.1)]">
+            <h1 class="mb-6 text-3xl font-semibold text-center text-gray-900">Novo lembrete</h1>
+
+            <div class="mb-4 messageAlert">
+                @yield('messageAlert')
+            </div>
+
+            <form action="{{ route('coupons.store') }}" method="POST" class="space-y-5">
             @csrf
 
             <div>
-                <label for="key" class="block text-sm font-medium text-gray-700 mb-1">Chave de ativação</label>
+                <label for="key" class="block mb-1 text-sm font-medium text-gray-700">Chave de ativação</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <img src="{{ asset('Imgs/Icons/key.png') }}" alt="Ícone de Chave" class="w-5 h-5">
                     </div>
-                    <input type="text" id="key" name="key" placeholder="Exemplo: qWuPi-roS5cY" class="pl-10 pr-3 py-2 w-full text-sm border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <input type="text" id="key" name="key" placeholder="Exemplo: qWuPi-roS5cY" class="w-full py-2 pl-10 pr-3 text-sm border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
             </div>
 
             <div>
-                <label for="value" class="block text-sm font-medium text-gray-700 mb-1">Valor</label>
+                <label for="value" class="block mb-1 text-sm font-medium text-gray-700">Valor</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                         <img src="{{ asset('Imgs/Icons/desconto.png') }}" alt="Ícone de desconto" class="w-5 h-5">
                     </div>
-                    <input type="number" min="1" max="100" id="value" name="value" placeholder="Exemplo: 50" class="pl-10 pr-3 py-2 w-full text-sm border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <input type="number" min="1" max="100" id="value" name="value" placeholder="Exemplo: 50" class="w-full py-2 pl-10 pr-3 text-sm border rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
                 </div>
             </div>
 
             <input type="submit" value="Criar Cupom" class="w-full bg-[#19231F] hover:bg-green-900 text-white py-2 rounded-lg cursor-pointer transition">
 
-            <hr class="border-t mt-6">
+            <hr class="mt-6 border-t">
 
             <div class="space-y-3">
-                <p class="text-sm text-gray-700 font-medium">Gerar chave de ativação</p>
+                <p class="text-sm font-medium text-gray-700">Gerar chave de ativação</p>
 
-                <input type="text" id="keyDisplay" readonly class="text-center w-full border rounded-lg p-2 bg-gray-100 text-gray-700" placeholder="Sua chave será exibida aqui">
+                <input type="text" id="keyDisplay" readonly class="w-full p-2 text-center text-gray-700 bg-gray-100 border rounded-lg" placeholder="Sua chave será exibida aqui">
 
                 <div class="flex gap-2">
-                    <button type="button" onclick="generateActivationKey()" class="flex-1 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg transition">
+                    <button type="button" onclick="generateActivationKey()" class="flex-1 py-2 text-white transition bg-green-600 rounded-lg hover:bg-green-700">
                         Gerar Key
                     </button>
 
-                    <button type="button" onclick="copyText()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition">
+                    <button type="button" onclick="copyText()" class="flex-1 py-2 text-white transition bg-blue-600 rounded-lg hover:bg-blue-700">
                         Copiar Texto
                     </button>
                 </div>
 
-                <p id="copiedMessage" class="text-green-600 text-sm text-center hidden">Texto copiado!</p>
+                <p id="copiedMessage" class="hidden text-sm text-center text-green-600">Texto copiado!</p>
             </div>
         </form>
-    </main>
+        </div>
+    </div>
 </body>
 
 </html>
