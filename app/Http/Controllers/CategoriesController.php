@@ -38,11 +38,17 @@ class CategoriesController extends Controller
             'name' => ['required', 'string', 'max:255'],
         ]);
 
-        $categories = $this->categories->create([
+        $existingCategory = $this->categories->where('name', $request->name)->first();
+
+        if ($existingCategory) {
+            return redirect()->route('categories.index')->with('messageError', 'Já existe uma categoria com esse nome.');
+        }
+
+        $create = $this->categories->create([
             'name' => $request->name
         ]);
 
-        if ($categories) {
+        if ($create) {
             return redirect()->route('categories.index')->with('messageSuccess', 'Categoria criada com êxito.');
         } else {
             return redirect()->route('categories.index')->with('messageError', 'Falha ao criar categoria');
@@ -70,6 +76,12 @@ class CategoriesController extends Controller
             return redirect()->route('categories.edit', ['category' => $id])->with('messageError', 'Preencha todos os campos obrigatórios.');
         }
 
+        $exists = $this->categories->where('name', $request->name)->where('id', '!=', $id)->exists();
+
+        if ($exists) {
+            return redirect()->route('categories.edit', ['category' => $id])->with('messageError', 'Já existe outra categoria com esse nome.');
+        }
+
         $update = $this->categories->where('id', $id)->update($request->except(['_token', '_method']));
 
         if ($update) {
@@ -85,20 +97,19 @@ class CategoriesController extends Controller
     public function destroy($id)
     {
         $category = $this->categories->find($id);
-    
+
         $Products = Products::where('category_id', $id)->exists();
-    
+
         if ($Products) {
             return redirect()->route('categories.index')->with('messageError', 'Não é possível excluir essa categoria. Existem produtos associados a ela.');
         }
-    
+
         $destroy = $category->delete();
-    
+
         if ($destroy) {
             return redirect()->route('categories.index')->with('messageSuccess', 'Categoria excluída com êxito.');
         }
-    
+
         return redirect()->route('categories.index')->with('messageError', 'Não foi possível excluir a categoria.');
     }
-    
 }
