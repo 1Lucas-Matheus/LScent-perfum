@@ -46,16 +46,22 @@ class CouponsController extends Controller
             'value' => ['required', 'integer', 'min:1', 'max:100'],
         ]);
 
-        $coupons = $this->coupons->create([
+        if ($this->coupons->where('key', $request->key)->exists()) {
+            return redirect()->route('coupons.index')->with('messageError', 'Já existe um cupom com essa chave.');
+        }
+
+        if ($this->coupons->where('value', $request->value)->exists()) {
+            return redirect()->route('coupons.index')->with('messageError', 'Já existe um cupom com esse valor.');
+        }
+
+        $create = $this->coupons->create([
             'key' => $request->key,
             'value' => $request->value
         ]);
 
-        if ($coupons) 
-        {
+        if ($create) {
             return redirect()->route('coupons.index')->with('messageSuccess', 'Cupom criada com êxito.');
-        } else
-        {
+        } else {
             return redirect()->route('coupons.index')->with('messageError', 'Falha ao criar cupom');
         }
     }
@@ -80,6 +86,17 @@ class CouponsController extends Controller
     {
         if (empty($request->key) || empty($request->value)) {
             return redirect()->route('coupons.edit', ['coupom' => $id])->with('messageError', 'Preencha todos os campos obrigatórios.');
+        }
+
+        $keyExists = $this->coupons->where('key', $request->key)->where('id', '!=', $id)->exists();
+        $valueExists = $this->coupons->where('value', $request->value)->where('id', '!=', $id)->exists();
+
+        if ($keyExists) {
+            return redirect()->route('coupons.edit', ['coupom' => $id])->with('messageError', 'Já existe outro cupom com essa chave.');
+        }
+
+        if ($valueExists) {
+            return redirect()->route('coupons.edit', ['coupom' => $id])->with('messageError', 'Já existe outro cupom com esse valor.');
         }
 
         $update = $this->coupons->where('id', $id)->update($request->except(['_token', '_method']));
