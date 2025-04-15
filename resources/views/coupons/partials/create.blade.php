@@ -19,7 +19,7 @@
 
     <div class="flex items-center justify-center w-full min-h-screen p-4 sm:ml-64 bg-gray-50">
         <div class="bg-white w-full max-w-md flex flex-col rounded-lg px-10 py-8 shadow-[10px_10px_30px_rgba(0,0,0,0.1)]">
-            <h1 class="mb-6 text-3xl font-semibold text-center text-gray-900">Novo lembrete</h1>
+            <h1 class="mb-6 text-3xl font-semibold text-center text-gray-900">Novo cupom</h1>
 
             <div class="mb-4 messageAlert">
                 @yield('messageAlert')
