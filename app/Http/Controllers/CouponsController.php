@@ -38,7 +38,7 @@ class CouponsController extends Controller
     public function store(Request $request)
     {
         if (empty($request->key) || empty($request->value)) {
-            return redirect()->route('products.index')->with('messageError', 'Preencha todos os campos obrigatórios.');
+            return redirect()->route('coupons.create')->with('messageError', 'Preencha todos os campos obrigatórios.');
         }
 
         $request->validate([
