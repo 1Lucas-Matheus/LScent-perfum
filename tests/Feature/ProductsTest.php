@@ -12,7 +12,6 @@ class ProductsTest extends TestCase
 {
     use RefreshDatabase;
 
-    // Testa acesso à lista de produtos com usuário autenticado
     public function test_products_index_shows_products()
     {
         $user = User::factory()->create();
@@ -28,7 +27,6 @@ class ProductsTest extends TestCase
         $response->assertViewHas('categories');
     }
 
-    // Testa acesso ao formulário de criação (create) com usuário autenticado
     public function test_create_shows_form_with_categories()
     {
         $user = User::factory()->create();
@@ -42,7 +40,6 @@ class ProductsTest extends TestCase
         $response->assertViewHas('categories');
     }
 
-    // Testa criação de produto com dados válidos
     public function test_store_creates_product_with_valid_data()
     {
         $user = User::factory()->create();
@@ -70,7 +67,6 @@ class ProductsTest extends TestCase
         ]);
     }
 
-    // Testa falha na criação com campos faltando
     public function test_store_fails_with_missing_fields()
     {
         $user = User::factory()->create();
@@ -87,7 +83,6 @@ class ProductsTest extends TestCase
         $response->assertSessionHas('messageError');
     }
 
-    // Testa acesso ao formulário de edição (edit)
     public function test_edit_shows_form_with_product_and_categories()
     {
         $user = User::factory()->create();
@@ -103,7 +98,6 @@ class ProductsTest extends TestCase
         $response->assertViewHas('categories');
     }
 
-    // Testa atualização do produto com dados válidos
     public function test_update_modifies_product_with_valid_data()
     {
         $user = User::factory()->create();
@@ -135,7 +129,6 @@ class ProductsTest extends TestCase
         ]);
     }
 
-    // Testa exclusão do produto
     public function test_destroy_deletes_product()
     {
         $user = User::factory()->create();
@@ -154,7 +147,6 @@ class ProductsTest extends TestCase
         ]);
     }
 
-    // Testa que rotas protegem contra usuários não autenticados
     public function test_routes_redirect_guest_to_login()
     {
         $category = Category::factory()->create();
