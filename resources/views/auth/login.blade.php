@@ -16,9 +16,17 @@
                 Login
             </h1>
 
+            <div>
+                <x-input-error :messages="$errors->get('email')" class="mt-1 mb-2" />
+            </div>
+
+            <div>
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            </div>
+
             <form action="{{ route('login') }}" method="post" class="flex flex-col w-full h-full">
                 @csrf
-                <label for="input-group-1" class="block mb-2 text-sm text-gray-900">Email</label>
+                <label for="input-group-1" class="block text-sm text-gray-900">Email</label>
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-2.5 pointer-events-none">
                         <img src="{{ asset('Imgs/Icons/email.png') }}" alt="Ícone de Email" class="w-5 h-5 text-gray-500 dark:text-gray-400">
@@ -42,6 +50,7 @@
 
                 <input type="submit" value="Entrar" class="bg-[#19231F] hover:bg-green-900 w-full my-3 p-2 rounded-lg text-white font-medium transition-colors duration-300">
             </form>
+
 
 
             <div class="flex justify-between w-full mb-4">
