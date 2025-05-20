@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
+use App\Models\Category;
 use App\Models\Products;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class ProductsController extends Controller
     public function index()
     {
         $products = $this->products->all();
-        $categories = Categories::all();
+        $categories = Category::all();
 
         return view('products.products', [
             'products' => $products,
@@ -33,7 +34,7 @@ class ProductsController extends Controller
      */
     public function create()
     {
-        $categories = Categories::all();
+        $categories = Category::all();
 
         return view('products.partials.create', ['categories' => $categories]);
     }
@@ -92,7 +93,7 @@ class ProductsController extends Controller
     public function edit($id)
     {
         $products = $this->products->find($id);
-        $categories = Categories::all();
+        $categories = Category::all();
 
         return view('products.partials.edit', [
             'products' => $products,

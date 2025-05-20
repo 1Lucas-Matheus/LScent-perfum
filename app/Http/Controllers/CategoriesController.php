@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
+use App\Models\Category;
 use App\Models\Products;
 use Illuminate\Http\Request;
 
 class CategoriesController extends Controller
 {
-    public readonly Categories $categories;
+    public readonly Category $categories;
     public function __construct()
     {
-        $this->categories = new Categories();
+        $this->categories = new Category();
     }
 
 

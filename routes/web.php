@@ -5,7 +5,7 @@ use App\Http\Controllers\CouponsController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RemindersController;
-use App\Models\Categories;
+use App\Models\Category;
 use App\Models\Coupons;
 use App\Models\Products;
 use App\Models\User;
@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     $countUsers = User::count();
     $countCoupons = Coupons::count();
-    $countCategory = Categories::count();
+    $countCategory = Category::count();
     $countProducts = Products::Count();
 
     $lowStockProducts = Products::where('quantity', '<=', 5)->take(5)->get();
@@ -26,7 +26,7 @@ Route::get('/dashboard', function () {
     $remainingLowStock = max(0, $totalLowStock - $lowStockProducts->count());
 
     $products = Products::all();
-    $categories = Categories::all();
+    $categories = Category::all();
 
     return view('dashboard', [
         'countUsers' => $countUsers,
